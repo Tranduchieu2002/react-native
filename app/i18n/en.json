@@ -1,0 +1,87 @@
+{
+  "common": {
+    "ok": "OK!",
+    "cancel": "Cancel",
+    "back": "Back",
+    "Empty": "Not found !"
+  },
+  "errors": {
+    "invalidEmail": "Invalid email address."
+  },
+  "HomeScreen": {
+    "header": {
+      "title": "News"
+    }
+  },
+  "Newsscreen": {
+    "title": "News",
+    "tabView": {
+      "all": "TẤT CẢ",
+      "politics": "KINH TẾ - XÃ HỘI",
+      "culture-sports": "VĂN HÓA - THỂ THAO"
+    }
+  },
+  "RegisterScreen": {
+   "title": "RegisterScreen",
+    "descriptionTitle": "Connect with your friends today!",
+    "labelsTextFields": {
+      "email": "Email Address",
+      "password": "Password",
+      "username": "Username"
+    },
+    "butttons": {
+      "remember" : "Remember Me",
+      "forgotPassword": "Forgot Password",
+      "submit": "Sign Up"
+    },
+    "placholderTextFields": { 
+      "email": "Enter your email",
+      "password": "Please Enter Your Password"
+    }
+  }
+  ,
+  "welcomeScreen": {
+    "poweredBy": "POWERED BY IGNITE",
+    "readyForLaunch": "Ready for launch.",
+    "continue": "CONTINUE"
+  },
+  "demoScreen": {
+    "howTo": "HOW TO",
+    "title": "What’s In This Stack?",
+    "tagLine": "Congratulations, you’ve got a very advanced React Native app template here.  Take advantage of this boilerplate!",
+    "reactotron": "Demo Reactotron",
+    "demoList": "Demo List",
+    "androidReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running, run adb reverse tcp:9090 tcp:9090 from your terminal, and reload the app.",
+    "iosReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+    "macosReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+    "webReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+    "windowsReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app."
+  },
+  "videoScreen": {
+    "tabView": {
+      "all":"Tất cả",
+      "news":"Thời sự",
+      "amonymous" : "vn-tt-gt",
+      "documentary": "phim tài liệu"
+    }
+  },
+  "demoListScreen": {
+    "title": "Demo List"
+  },
+  "errorScreen": {
+    "title": "Something went wrong!",
+    "friendlySubtitle": "This is the screen that your users will see in production when an error is thrown. You'll want to customize this message (located in `app/i18n/en.json`) and probably the layout as well (`app/screens/error`). If you want to remove this entirely, check `app/app.tsx` for the <ErrorBoundary> component.",
+    "traceTitle": "Error from %{name} stack",
+    "reset": "RESET APP"
+  },
+  "BottomTab": {
+    "live": "Live",
+    "video": "Video",
+    "audio": "Audio",
+    "news": "News"
+},
+  "storybook": {
+    "placeholder": "Placeholder",
+    "field": "Field"
+  }
+}

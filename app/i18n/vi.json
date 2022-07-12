@@ -1,0 +1,85 @@
+{
+    "common": {
+      "ok": "OK!",
+      "cancel": "Cancel",
+      "back": "Back",
+      "empty": "Không thể tìm thấy !"
+    },
+    "errors": {
+      "invalidEmail": "Email không hợp lệ."
+    },  
+    "Newsscreen": {
+      "title": "TIN TỨC",
+      "tabView": {
+        "all": "TẤT CẢ",
+        "Socioeconomic": "KINH TẾ - XÃ HỘI",
+        "politics": "CHÍNH TRỊ",
+        "culture-sports": "VĂN HÓA - THỂ THAO"
+      }
+    },
+    "BottomTab": {
+        "live": "Trực tuyến",
+        "video": "Video",
+        "audio": "Audio",
+        "news": "Tin tức"
+    },
+    "RegisterScreen": {
+     "title": "RegisterScreen",
+      "descriptionTitle": "Connect with your friends today!",
+      "labelsTextFields": {
+        "email": "Email Address",
+        "password": "Password",
+        "username": "Username"
+      },
+      "butttons": {
+        "remember" : "Remember Me",
+        "forgotPassword": "Forgot Password",
+        "submit": "Đăng kí"
+      },
+      "placholderTextFields": { 
+        "email": "Enter your email",
+        "password": "Please Enter Your Password"
+      }
+    }
+    ,
+    "welcomeScreen": {
+      "poweredBy": "POWERED BY IGNITE",
+      "readyForLaunch": "Ready for launch.",
+      "continue": "CONTINUE"
+    },
+    "demoScreen": {
+      "howTo": "HOW TO",
+      "title": "What’s In This Stack?",
+      "tagLine": "Congratulations, you’ve got a very advanced React Native app template here.  Take advantage of this boilerplate!",
+      "reactotron": "Demo Reactotron",
+      "demoList": "Demo List",
+      "androidReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running, run adb reverse tcp:9090 tcp:9090 from your terminal, and reload the app.",
+      "iosReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+      "macosReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+      "webReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+      "windowsReactotronHint": "If this doesn't work, ensure the Reactotron desktop app is running and reload app."
+    },
+    "demoListScreen": {
+      "title": "Demo List"
+    },
+    "videoScreen": {
+      "tabView": {
+        "all":"Tất cả",
+        "news":"Thời sự",
+        "amonymous" : "vn-tt-gt",
+        "documentary": "phim tài liệu"
+      }
+    },
+    "errorScreen": {
+      "title": "Something went wrong!",
+      "friendlySubtitle": "This is the screen that your users will see in production when an error is thrown. You'll want to customize this message (located in `app/i18n/en.json`) and probably the layout as well (`app/screens/error`). If you want to remove this entirely, check `app/app.tsx` for the <ErrorBoundary> component.",
+      "traceTitle": "Error from %{name} stack",
+      "reset": "RESET APP"
+    },
+  
+    "storybook": {
+      "placeholder": "Placeholder",
+      "field": "Field"
+    }
+  }
+  
