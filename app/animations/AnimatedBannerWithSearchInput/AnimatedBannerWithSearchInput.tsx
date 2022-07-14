@@ -10,7 +10,6 @@ import { useDimensions } from '../../hooks/useDemission';
 export default ({ navigation }: any) => {
   const { height } = useDimensions("window")
   const animatedValue = useRef(new Animated.Value(0)).current;
-  console.log(animatedValue);
   const bannerAnimation = {
     transform: [
       {
@@ -96,7 +95,6 @@ export default ({ navigation }: any) => {
       <ScrollView
         onScroll={(nativeEvent: NativeSyntheticEvent<NativeScrollEvent>) => {
           animatedValue.setValue(nativeEvent.nativeEvent.contentOffset.y)
-          console.log(nativeEvent.nativeEvent.contentOffset.y);
         }}
         scrollEventThrottle={16}>
         <View style={styles.paddingForBanner} />

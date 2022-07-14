@@ -1,6 +1,5 @@
 import React, { FC } from "react"
 import { View, ViewStyle } from "react-native"
-import { SceneRendererProps } from "react-native-tab-view"
 import { translate } from "../../i18n"
 import TabViewNavigator from "../../navigators/tab.navigator"
 import AllNewsScreen from "./AllNewsScreen"
@@ -79,50 +78,6 @@ export const NewsScreen: FC<Props> = ({ }: Props) => {
   return (
     <View style={NEWSSCREEN}>
       <TabViewNavigator routes={routes} renderScene={renderScene} />
-      {/* <Animated.FlatList
-        keyExtractor={(item) => item.id + ""}
-        data={listArticles}
-        decelerationRate={0.3}
-        onScroll={(e) => scrollAnimations.setValue(e.nativeEvent.contentOffset.y)}
-        scrollEventThrottle={16}
-        renderItem={({ item, index }) => {
-          const range = [-1, 0, ITEMSIZE * index, ITEMSIZE * (index + 2)]
-          const scaleItem = scrollAnimations.interpolate({
-            inputRange: range,
-            outputRange: [1, 1, 1, 0],
-            extrapolate: "clamp",
-          })
-          return (
-            <Animated.View
-              style={{
-                ...ARTICLESTYLES,
-                backgroundColor: cardBgColor,
-                transform: [
-                  {
-                    scale: scaleItem,
-                  },
-                ],
-              }}
-            >
-              <Image
-                blurRadius={9999}
-                source={{ uri: item?.image }}
-                // eslint-disable-next-line react-native/no-inline-styles
-                style={{
-                  width: AVATARSIZE,
-                  height: AVATARSIZE,
-                  borderRadius: 9999,
-                  marginRight: spacing[3],
-                }}
-              ></Image>
-              <View style={FULL}>
-                <Text text={item?.name} style={{ color: textColor }}></Text>
-                <Text text={item?.jobTitle} style={{ color: textColor }}></Text>
-              </View>
-            </Animated.View>
-          )
-        }}
-      ></Animated.FlatList> */}
     </View>
   )
 }

@@ -1,4 +1,5 @@
 import React, { FC } from "react"
+import notifee from '@notifee/react-native';
 import { ImageStyle, Platform, TextStyle, View, ViewStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { observer } from "mobx-react-lite"
@@ -96,6 +97,34 @@ const platformCommand = Platform.select({
 export const DemoScreen: FC<StackScreenProps<NavigatorParamList, "demo">> = observer(
   ({ navigation }) => {
     const goBack = () => navigation.goBack()
+    async function onDisplayNotification() {
+      const channelId = await notifee.createChannel({
+        id: 'default',
+        name: 'Default Channel',
+      });
+      // Required for iOS
+      // See https://notifee.app/react-native/docs/ios/permissions
+      await notifee.requestPermission();
+
+      const notificationId = await notifee.displayNotification({
+        id: '123',
+        title: 'Notification Title',
+        body: 'Main body content of the notification',
+        android: {
+          channelId,
+        },
+      });
+
+      // Sometime later...
+      await notifee.displayNotification({
+        id: '123',
+        title: 'Updated Notification Title',
+        body: 'Updated main body content of the notification',
+        android: {
+          channelId,
+        },
+      });
+    }
 
     const demoReactotron = React.useMemo(
       () => async () => {
@@ -165,8 +194,10 @@ export const DemoScreen: FC<StackScreenProps<NavigatorParamList, "demo">> = obse
             style={DEMO}
             textStyle={DEMO_TEXT}
             tx="demoScreen.demoList"
-            onPress={() => navigation.navigate("demoList")}
+            onPress={() => onDisplayNotification()}
           />
+          <Button text="Display Notification" onPress={() => onDisplayNotification()} />
+
           <Image source={logoIgnite} style={IGNITE} />
           <View style={LOVE_WRAPPER}>
             <Text style={LOVE} text="Made with" />
