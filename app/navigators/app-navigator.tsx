@@ -4,17 +4,19 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
-import React, { useEffect } from "react"
-import { useColorScheme } from "react-native"
-import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen, DemoScreen, DemoListScreen, RegisterScreen } from "../screens"
-import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
-import { HomeScreen } from "../screens/home/homeScreen"
-import { observer } from "mobx-react-lite"
-import { useStores } from "../models"
-import LoginScreen from "../screens/login/LoginScreen"
-import AnimatedBannerWithSearchInput from "../animations/AnimatedBannerWithSearchInput/AnimatedBannerWithSearchInput"
+import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React, { useEffect, useState } from "react";
+import { useColorScheme } from "react-native";
+
+import messaging from '@react-native-firebase/messaging';
+import { observer } from "mobx-react-lite";
+import AnimatedBannerWithSearchInput from "../animations/AnimatedBannerWithSearchInput/AnimatedBannerWithSearchInput";
+import { useStores } from "../models";
+import { DemoListScreen, DemoScreen, RegisterScreen, WelcomeScreen } from "../screens";
+import { HomeScreen } from "../screens/home/homeScreen";
+import LoginScreen from "../screens/login/LoginScreen";
+import { navigationRef, useBackButtonHandler } from "./navigation-utilities";
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -53,6 +55,7 @@ const AppStack = () => {
       <Stack.Screen name="demoList" component={DemoListScreen} />
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="animations" component={AnimatedBannerWithSearchInput} />
+      <Stack.Screen name="demo" component={DemoScreen} />
     </Stack.Navigator>
   )
 }
@@ -81,10 +84,23 @@ const AuthNavigator = () => (
 interface NavigationProps extends Partial<React.ComponentProps<typeof NavigationContainer>> { }
 
 export const AppNavigator = observer((props: NavigationProps) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const colorScheme = useColorScheme()
   const { authStore } = useStores()
   useBackButtonHandler(canExit)
-  return (
+  useEffect(() => {
+    // con
+    return () => {
+      // clearEffect
+    };
+  }, []);
+  const requestPermission = async () => {
+    const authStatus = await messaging().requestPermission();
+    console.log(authStatus);
+  }
+
+/*   if (isLoading) return <Icon icon="bug" />
+ */  return (
     <NavigationContainer
       ref={navigationRef}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}

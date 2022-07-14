@@ -9,6 +9,11 @@
 // It's easier just to leave it here.
 import App from "./app/app.tsx"
 import { AppRegistry } from "react-native"
-
+import messaging from "@react-native-firebase/messaging"
+import { DisplayNotification } from "./app/utils/Notifications"
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+    console.log('Message handled in the background!', remoteMessage);
+    DisplayNotification(remoteMessage)
+});
 AppRegistry.registerComponent("App", () => App)
 export default App

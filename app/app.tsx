@@ -13,12 +13,20 @@ import "./i18n"
 import "./utils/ignore-warnings"
 import React, { useState, useEffect } from "react"
 import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context"
+import messaging from '@react-native-firebase/messaging';
+import { version } from '../package.json';
 import { initFonts } from "./theme/fonts" // expo
 import * as storage from "./utils/storage"
 import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { ErrorBoundary } from "./screens/error/error-boundary"
+import { DisplayNotification } from "./utils/Notifications";
+import ModalUpdateLatestVesion from "./components/modal/ModalUpdateLatestVesion";
+import { getVersion } from "./services/firebase";
+import { FullWindowOverlay } from "react-native-screens";
+import { color } from "./theme";
+import { View } from "react-native";
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -31,6 +39,7 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
  */
 function App() {
   const [rootStore, setRootStore] = useState<RootStore | undefined>(undefined)
+  const [latestVersion, setLatestVersion] = useState<number | null>(null)
   const {
     initialNavigationState,
     onNavigationStateChange,
@@ -39,11 +48,22 @@ function App() {
 
   // Kick off initial async loading actions, like loading fonts and RootStore
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       await initFonts() // expo
       setupRootStore().then(setRootStore)
+      const latestV = await getVersion()
+      setLatestVersion(parseFloat(latestV))
     })()
+
+    requestPermission()
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      DisplayNotification(remoteMessage);
+    });
+    return unsubscribe;
   }, [])
+  const requestPermission = async () => {
+    await messaging().requestPermission();
+  }
 
   // Before we show the app, we have to wait for our state to be ready.
   // In the meantime, don't render anything. This will be the background
@@ -59,6 +79,12 @@ function App() {
       <RootStoreProvider value={rootStore}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={"always"}>
+            {
+              (latestVersion && parseFloat(version) < latestVersion) &&
+              <View style={{ backgroundColor: color.palette.black, flex: 1, opacity: 0.6, position: "absolute", zIndex: 20, left: 0, top: 0, right: 0, bottom: 0, width: "100%", height: "100%", maxWidth: "100%" }} >
+                <ModalUpdateLatestVesion />
+              </View>
+            }
             <AppNavigator
               initialState={initialNavigationState}
               onStateChange={onNavigationStateChange}
