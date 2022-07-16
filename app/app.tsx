@@ -9,25 +9,24 @@
  * The app navigation resides in ./app/navigators, so head over there
  * if you're interested in adding screens and navigators.
  */
-import "./i18n"
-import "./utils/ignore-warnings"
-import React, { useState, useEffect } from "react"
-import { SafeAreaProvider, initialWindowMetrics } from "react-native-safe-area-context"
 import messaging from '@react-native-firebase/messaging';
-import { version } from '../package.json';
-import { initFonts } from "./theme/fonts" // expo
-import * as storage from "./utils/storage"
-import { AppNavigator, useNavigationPersistence } from "./navigators"
-import { RootStore, RootStoreProvider, setupRootStore } from "./models"
-import { ToggleStorybook } from "../storybook/toggle-storybook"
-import { ErrorBoundary } from "./screens/error/error-boundary"
-import { DisplayNotification } from "./utils/Notifications";
-import ModalUpdateLatestVesion from "./components/modal/ModalUpdateLatestVesion";
-import { getVersion } from "./services/firebase";
-import { FullWindowOverlay } from "react-native-screens";
-import { color } from "./theme";
+import React, { useEffect, useState } from "react";
+import SplashScreen from 'react-native-splash-screen';
 import { View } from "react-native";
-
+import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context";
+import { version } from '../package.json';
+import { ToggleStorybook } from "../storybook/toggle-storybook";
+import ModalUpdateLatestVesion from "./components/modal/ModalUpdateLatestVesion";
+import "./i18n";
+import { RootStore, RootStoreProvider, setupRootStore } from "./models";
+import { AppNavigator, useNavigationPersistence } from "./navigators";
+import { ErrorBoundary } from "./screens/error/error-boundary";
+import { getVersion } from "./services/firebase";
+import { color } from "./theme";
+import { initFonts } from "./theme/fonts"; // expo
+import "./utils/ignore-warnings";
+import { DisplayNotification } from "./utils/Notifications";
+import * as storage from "./utils/storage";
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
 // https://github.com/kmagiera/react-native-screens#using-native-stack-navigator
@@ -47,6 +46,7 @@ function App() {
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
   // Kick off initial async loading actions, like loading fonts and RootStore
+  
   useEffect(() => {
     ; (async () => {
       await initFonts() // expo
@@ -81,7 +81,7 @@ function App() {
           <ErrorBoundary catchErrors={"always"}>
             {
               (latestVersion && parseFloat(version) < latestVersion) &&
-              <View style={{ backgroundColor: color.palette.black, flex: 1, opacity: 0.6, position: "absolute", zIndex: 20, left: 0, top: 0, right: 0, bottom: 0, width: "100%", height: "100%", maxWidth: "100%" }} >
+              <View style={{ backgroundColor: color.palette.white, flex: 1, opacity: 0.6, position: "absolute", zIndex: 20, left: 0, top: 0, right: 0, bottom: 0, width: "100%", height: "100%", maxWidth: "100%" }} >
                 <ModalUpdateLatestVesion />
               </View>
             }

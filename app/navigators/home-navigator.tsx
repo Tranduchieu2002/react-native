@@ -7,11 +7,13 @@ import {
   AudioSvg,
   AudioActiveSvg,
   LiveActiveSvg,
-  LiveSvg,
+  HomeActiveSvg,
   NewsSvg,
   VideoActiveSvg,
   VideoSvg,
   NewsActiveSvg,
+  Star,
+  ImageSvg,
 } from "../../assets/svgs"
 import { Button, Text } from "../components"
 import { NewsScreen } from "../screens"
@@ -32,7 +34,7 @@ const TABBAR: ViewStyle = {
   paddingRight: spacing[4] + 4, // 20
   borderTopLeftRadius: spacing[3] + 1,
   borderTopRightRadius: spacing[3] + 1,
-  backgroundColor: color.palette.deepBlack,
+  backgroundColor: color.palette.white,
   alignItems: "center",
   justifyContent: "space-between",
 }
@@ -45,43 +47,43 @@ const TABBARBUTTON: ViewStyle = {
 const FORCUSICON: ViewStyle = {}
 
 export enum RouteNames {
-  live = "live",
-  news = "news",
-  audio = "audio",
+  home = "home",
+  myNews = "myNews",
+  images = "images",
   video = "video",
 }
 
 const tabbarCustom = [
   {
     index: 0,
-    title: "live",
-    icon: <LiveSvg />,
-    activeIcon: <LiveActiveSvg />,
+    title: "home",
+    icon: <HomeActiveSvg />,
+    activeIcon: <HomeActiveSvg color={color.palette.redNature} />,
   },
   {
     index: 1,
     title: "video",
-    icon: <VideoSvg />,
-    activeIcon: <VideoActiveSvg />,
+    icon: <Star />,
+    activeIcon: <Star color={color.palette.redNature}  />,
   },
   {
     index: 2,
-    title: "audio",
-    icon: <AudioSvg />,
-    activeIcon: <AudioActiveSvg />,
+    title: "images",
+    icon: <ImageSvg />,
+    activeIcon: <AudioActiveSvg color={color.palette.redNature}  />,
   },
   {
     index: 3,
-    title: "news",
-    icon: <NewsSvg />,
-    activeIcon: <NewsActiveSvg />,
+    title: "myNews",
+    icon: <VideoSvg />,
+    activeIcon: <NewsActiveSvg color={color.palette.redNature} />,
   },
 ]
 export type BottomTabParams = {
-  news: undefined
-  audio: undefined
+  myNews: undefined
+  images: undefined
   video: undefined
-  live: undefined
+  home: undefined
 }
 
 export type title = keyof BottomTabParams
@@ -133,7 +135,7 @@ function TabBar({ state, descriptors, navigation }) {
             }}
           >
             {isFocused ? tabbarCustom[index].activeIcon : tabbarCustom[index].icon}
-            <Text text={label} style={TABBARTEXT}></Text>
+            <Text text={label} style={[TABBARTEXT, { color: isFocused ? color.palette.redNature : color.palette.lightGrey }]}></Text>
           </Button>
         )
       })}
@@ -145,17 +147,31 @@ const BottomTabNavigation: FC = () => {
   return (
     <>
       <Stack.Navigator
-        initialRouteName={RouteNames.news}
+        initialRouteName={RouteNames.myNews}
         screenOptions={{
           headerShown: false,
         }}
         tabBar={(props) => <TabBar {...props} />}
       >
         <Stack.Screen
-          name={RouteNames.live}
+          name={RouteNames.home}
           component={LiveScreen}
           options={{
-            title: String(translate("BottomTab.live")),
+            title: String(translate("BottomTab.home")),
+          }}
+        />
+        <Stack.Screen
+          name={RouteNames.myNews}
+          component={NewsScreen}
+          options={{
+            title: String(translate("BottomTab.myNews")),
+          }}
+        />
+        <Stack.Screen
+          name={RouteNames.images}
+          component={AudioScreen}
+          options={{
+            title: String(translate("BottomTab.images")),
           }}
         />
         <Stack.Screen
@@ -165,20 +181,7 @@ const BottomTabNavigation: FC = () => {
             title: String(translate("BottomTab.video")),
           }}
         />
-        <Stack.Screen
-          name={RouteNames.audio}
-          component={AudioScreen}
-          options={{
-            title: String(translate("BottomTab.audio")),
-          }}
-        />
-        <Stack.Screen
-          name={RouteNames.news}
-          component={NewsScreen}
-          options={{
-            title: String(translate("BottomTab.news")),
-          }}
-        />
+
       </Stack.Navigator>
     </>
   )
@@ -193,8 +196,13 @@ const styles = ScaledSheet.create({
   },
   tabbar: {
     height: "61@ms",
-    backgroundColor: color.palette.deepBlack
+    backgroundColor: color.palette.white
   },
+  textActive: {
+    fontSize: "10@sm",
+    lineHeight: "12@sm",
+    color: color.palette.redNature
+  }
 })
 const TABBARTEXT: TextStyle = {
   fontFamily: fontFamily.medium,

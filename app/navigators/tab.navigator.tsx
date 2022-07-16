@@ -24,7 +24,7 @@ const TabViewNavigator: React.FC<TabViewProps> = observer((props) => {
     const tabbarRef = React.useRef(null)
     const [refreshing, setRefreshing] = React.useState(false)
 
-    const wait = (timeout) => {
+    const wait = (timeout: number) => {
       return new Promise((resolve) => setTimeout(resolve, timeout))
     }
 
@@ -51,7 +51,6 @@ const TabViewNavigator: React.FC<TabViewProps> = observer((props) => {
                 style={[styles.tabItem, { backgroundColor: isForcused ? "#fff" : "transparent" }]}
                 onPress={() => {
                   setIndex(i)
-
                 }}
                 text={route.title}
                 textStyle={isForcused ? styles.textActive : styles.text}

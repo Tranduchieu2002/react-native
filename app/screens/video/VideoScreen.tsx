@@ -9,7 +9,7 @@ import TabAllVideoScreen from './tabview/tabAllVideoScreen'
 type SceneNewScreen = {
   all: undefined
   news: undefined
-  amonymous: undefined
+  anonymous: undefined
   documentary: undefined
 }
 const FirstRoute = () => <View style={{ flex: 1, backgroundColor: "#ff4081" }} />
@@ -22,7 +22,7 @@ const renderScene = ({ route }: any): JSX.Element | null => {
       return <TabAllVideoScreen />
     case "news":
       return <SecondRoute />
-    case "amonymous":
+    case "anonymous":
       return <FirstRoute />
     case "documentary":
       return <SecondRoute />
@@ -35,8 +35,8 @@ export default function VideoScreen() {
     { key: "all", title: String(translate(`videoScreen.tabView.all`)) },
     { key: "news", title: String(translate(`videoScreen.tabView.news`)) },
     {
-      key: "amonymous",
-      title: String(translate(`videoScreen.tabView.amonymous`)),
+      key: "anonymous",
+      title: String(translate(`videoScreen.tabView.anonymous`)),
     },
     {
       key: "documentary",

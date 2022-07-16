@@ -18,10 +18,10 @@
       }
     },
     "BottomTab": {
-        "live": "Trực tuyến",
+        "home": "Trang chủ",
         "video": "Video",
-        "audio": "Audio",
-        "news": "Tin tức"
+        "images": "Ảnh",
+        "myNews": "Tin của bạn"
     },
     "RegisterScreen": {
      "title": "RegisterScreen",
@@ -66,7 +66,7 @@
       "tabView": {
         "all":"Tất cả",
         "news":"Thời sự",
-        "amonymous" : "vn-tt-gt",
+        "anonymous" : "vn-tt-gt",
         "documentary": "phim tài liệu"
       }
     },

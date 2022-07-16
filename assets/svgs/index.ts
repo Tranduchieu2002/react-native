@@ -1,13 +1,16 @@
-export {default as  MenuSvg} from "./menu.svg";
-export {default as  LiveSvg} from "./live.svg";
-export {default as  AudioSvg} from "./mic.svg";
-export {default as  VideoSvg} from "./video.svg";
-export {default as  NewsSvg} from "./news.svg";
-export {default as  LiveActiveSvg} from "./liveActive.svg";
-export {default as  AudioActiveSvg} from "./micActive.svg";
-export {default as  VideoActiveSvg} from "./videoActive.svg";
-export {default as  NewsActiveSvg} from "./newsActive.svg";
-export {default as  SearchSvg} from "./search-normal.svg";
-export {default as  EyeSvg} from "./eye.svg";
-export {default as  EyeOffSvg} from "./eye-off.svg";
-export {default as PlaySvg} from "./play.svg";
+export { default as MenuSvg } from "./menu.svg"
+export { default as HomeActiveSvg } from "./homeActive.svg"
+export { default as Star } from "./star.svg"
+export { default as ImageSvg } from "./image.svg"
+export { default as LiveSvg } from "./live.svg"
+export { default as AudioSvg } from "./mic.svg"
+export { default as VideoSvg } from "./video.svg"
+export { default as NewsSvg } from "./news.svg"
+export { default as LiveActiveSvg } from "./liveActive.svg"
+export { default as AudioActiveSvg } from "./micActive.svg"
+export { default as VideoActiveSvg } from "./videoActive.svg"
+export { default as NewsActiveSvg } from "./newsActive.svg"
+export { default as SearchSvg } from "./search-normal.svg"
+export { default as EyeSvg } from "./eye.svg"
+export { default as EyeOffSvg } from "./eye-off.svg"
+export { default as PlaySvg } from "./play.svg"
