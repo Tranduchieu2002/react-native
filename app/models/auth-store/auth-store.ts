@@ -1,8 +1,7 @@
-import { autorun } from "mobx"
-import { addMiddleware, flow, Instance, types } from "mobx-state-tree"
+import { flow, Instance, types } from "mobx-state-tree"
 import { AuthenticationApi } from "../../services/api/auth/auth"
 import { RegisterResult } from "../../services/api/auth/auth.types"
-import { save, load } from "../../utils/storage"
+import { load, save } from "../../utils/storage"
 import { withEnvironment } from "../extensions/with-environment"
 import { withStatus } from "../extensions/withStatus"
 import { createUserStoreDefaultModel, UserSnapshotOut } from "../user/user"
@@ -33,19 +32,17 @@ export const AuthStoreModel = types
     ) {
       self.setStatus("pending")
       const user = yield load("user")
-      console.log({user})
       if (user) {
         self.Authenticate(user)
         self.setStatus("done")
         return
       }
       const authenticationApi = new AuthenticationApi(self.environment.api)
-      const res = yield authenticationApi.login(emailAddress, password, notificationToken)
+      const res = yield authenticationApi.login(emailAddress, password, "huhu")
       if (res.kind === "ok") {
         self.setStatus("done")
         self.Authenticate(res.user)
       } else {
-        console.log(self.user)
         self.setStatus("error")
         __DEV__ && console.log(res.kind)
       }

@@ -49,6 +49,7 @@ function App() {
   
   useEffect(() => {
     ; (async () => {
+      SplashScreen.hide()
       await initFonts() // expo
       setupRootStore().then(setRootStore)
       const latestV = await getVersion()

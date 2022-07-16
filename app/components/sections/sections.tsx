@@ -18,7 +18,6 @@ const SeparatorCpn = (props) => {
 
 const SectionListNews: React.FC<SectionListNewsProps> = ({ styleSections, horizontal, itemHorizontal, data, ...props }) => {
   const style = [styles.container, styleSections]
-  const scrollYRef = React.useRef(0)
 
   const renderHeaderSections = React.useCallback(({ section: { title, data } }) => {
     return (<View style={styles.sectionHeaderWrap}>
@@ -29,7 +28,7 @@ const SectionListNews: React.FC<SectionListNewsProps> = ({ styleSections, horizo
           contentContainerStyle={{ marginHorizontal: 24 / -4, }}
           data={data}
           renderItem={({ item }) => <ItemHorizontal item={item} />}
-          showsHorizontalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false} 
         />
       ) : null}
     </View>)
@@ -49,7 +48,7 @@ const SectionListNews: React.FC<SectionListNewsProps> = ({ styleSections, horizo
       horizontal={horizontal}
       stickySectionHeadersEnabled
       SectionSeparatorComponent={SeparatorCpn}
-      style={[style,]}
+      style={[style, ]}
      /*  onScroll={(event) => {
         const currentYPosition = event.nativeEvent.contentOffset.y
         const oldPosition = scrollYRef.current

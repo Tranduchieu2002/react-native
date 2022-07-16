@@ -46,11 +46,19 @@ export class AuthenticationApi {
     notificationToken: string,
   ): Promise<LoginResult> {
     try {
-      const response: ApiResponse<any> = await this.apisauce.post("/signin", {
-        emailAddress,
-        password,
-        notificationToken,
-      })
+      const response: ApiResponse<any> = await this.apisauce.post(
+        "/signin",
+        {
+          emailAddress,
+          password,
+          notificationToken,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      )
       if (!response.ok) {
         const problem = getGeneralApiProblem(response)
         if (problem) return problem

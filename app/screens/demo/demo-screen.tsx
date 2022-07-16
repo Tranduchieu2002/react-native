@@ -194,7 +194,7 @@ export const DemoScreen: FC<StackScreenProps<NavigatorParamList, "demo">> = obse
             style={DEMO}
             textStyle={DEMO_TEXT}
             tx="demoScreen.demoList"
-            onPress={() => onDisplayNotification()}
+            onPress={() => navigation.navigate("home")}
           />
           <Button text="Display Notification" onPress={() => onDisplayNotification()} />
 
