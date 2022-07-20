@@ -6,39 +6,19 @@
  */
 import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useColorScheme } from "react-native";
 
-import messaging from '@react-native-firebase/messaging';
 import { observer } from "mobx-react-lite";
 import AnimatedBannerWithSearchInput from "../animations/AnimatedBannerWithSearchInput/AnimatedBannerWithSearchInput";
 import { useStores } from "../models";
-import { DemoListScreen, DemoScreen, RegisterScreen, WelcomeScreen } from "../screens";
+import { DemoListScreen, DemoScreen, DetailNewScreen, RegisterScreen, WelcomeScreen, } from "../screens";
 import { HomeScreen } from "../screens/home/homeScreen";
 import LoginScreen from "../screens/login/LoginScreen";
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities";
+import { AppScreenNames, AuthNavigatorParamList, NavigatorParamList } from "./types";
 
-/**
- * This type allows TypeScript to know what routes are defined in this navigator
- * as well as what properties (if any) they might take when navigating to them.
- *
- * If no params are allowed, pass through `undefined`. Generally speaking, we
- * recommend using your MobX-State-Tree store(s) to keep application state
- * rather than passing state through navigation params.
- *
- * For more information, see this documentation:
- *   https://reactnavigation.org/docs/params/
- *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
- */
-export type NavigatorParamList = {
-  welcome: undefined
-  demo: undefined
-  demoList: undefined
-  register: undefined
-  home: undefined
-  animations: undefined
-  // 🔥 Your screens go here
-}
+
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<NavigatorParamList>()
@@ -49,22 +29,20 @@ const AppStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="welcome"
+      initialRouteName={AppScreenNames.welcome}
     >
-      <Stack.Screen name="home" component={HomeScreen} />
-      <Stack.Screen name="demoList" component={DemoListScreen} />
-      <Stack.Screen name="welcome" component={WelcomeScreen} />
-      <Stack.Screen name="animations" component={AnimatedBannerWithSearchInput} />
-      <Stack.Screen name="demo" component={DemoScreen} />
+      <Stack.Screen name={AppScreenNames.detailNew} component={DetailNewScreen} />
+      <Stack.Screen name={AppScreenNames.home} component={HomeScreen} />
+      <Stack.Screen name={AppScreenNames.demoList} component={DemoListScreen} />
+      <Stack.Screen name={AppScreenNames.welcome} component={WelcomeScreen} />
+      <Stack.Screen name={AppScreenNames.animations} component={AnimatedBannerWithSearchInput} />
+      <Stack.Screen name={AppScreenNames.demo} component={DemoScreen} />
     </Stack.Navigator>
   )
 }
 
 
-export type AuthNavigatorParamList = {
-  login: undefined,
-  register: undefined,
-}
+
 
 const AuthStack = createNativeStackNavigator<AuthNavigatorParamList>()
 const AuthNavigator = () => (
@@ -84,23 +62,10 @@ const AuthNavigator = () => (
 interface NavigationProps extends Partial<React.ComponentProps<typeof NavigationContainer>> { }
 
 export const AppNavigator = observer((props: NavigationProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
   const colorScheme = useColorScheme()
   const { authStore } = useStores()
   useBackButtonHandler(canExit)
-  useEffect(() => {
-    // con
-    return () => {
-      // clearEffect
-    };
-  }, []);
-  const requestPermission = async () => {
-    const authStatus = await messaging().requestPermission();
-    console.log(authStatus);
-  }
-
-/*   if (isLoading) return <Icon icon="bug" />
- */  return (
+  return (
     <NavigationContainer
       ref={navigationRef}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}

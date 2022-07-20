@@ -1,13 +1,14 @@
 import { observer } from "mobx-react-lite"
 import * as React from "react"
 import {
+  Platform,
   RefreshControl, ScrollView, useWindowDimensions,
   View
 } from "react-native"
 import { ScaledSheet } from "react-native-size-matters"
 import { TabView } from "react-native-tab-view"
 import { Button } from "../components"
-import { spacing } from "../theme"
+import { color, spacing } from "../theme"
 import { fontFamily } from "../theme/fonts"
 
 interface TabViewProps {
@@ -48,7 +49,7 @@ const TabViewNavigator: React.FC<TabViewProps> = observer((props) => {
               <Button
                 key={i}
                 activeOpacity={0.8}
-                style={[styles.tabItem, { backgroundColor: isForcused ? "#fff" : "transparent" }]}
+                style={[styles.tabItem]}
                 onPress={() => {
                   setIndex(i)
                 }}
@@ -65,6 +66,7 @@ const TabViewNavigator: React.FC<TabViewProps> = observer((props) => {
     <TabView
       navigationState={{ index, routes }}
       renderScene={renderScene}
+      style={styles.tabContainer}
       swipeEnabled={false}
       renderTabBar={(props) => <RenderTabBar {...props} index={index} />}
       onIndexChange={setIndex}
@@ -73,6 +75,8 @@ const TabViewNavigator: React.FC<TabViewProps> = observer((props) => {
   )
 })
 const styles = ScaledSheet.create({
+  tabContainer: {
+  },
   tabBar: {
     justifyContent: "space-between",
     flexDirection: "row",
@@ -81,31 +85,53 @@ const styles = ScaledSheet.create({
     height: "24@s",
     paddingLeft: spacing[4],
     paddingRight: spacing[4],
+    ...Platform.select({
+      android: { elevation: 4 },
+      ios: {
+        shadowColor: '#a8bed2',
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        shadowOffset: {
+          width: 2,
+          height: 2,
+        },
+      },
+    }),
   },
   tabStyle: {
     flexGrow: 0,
-    marginBottom: spacing[3],
+    marginBottom: "12@vs",
+    marginTop: "12@vs",
   },
   tabItem: {
     paddingTop: spacing[1] + 2,
     paddingBottom: spacing[1] + 2,
-    paddingLeft: spacing[4],
-    paddingRight: spacing[4],
     borderRadius: spacing[1],
+    backgroundColor: color.transparent,
+    margin: 0,
+    marginHorizontal: 0,
   },
   text: {
     color: "#B1B1B1",
     fontSize: spacing[2] + 2,
     fontWeight: "600",
     textTransform: "uppercase",
-    fontFamily: fontFamily.medium
+    fontFamily: fontFamily.medium,
+    paddingHorizontal: 0,
   },
   textActive: {
-    color: "#181818",
+    color: color.palette.redNature,
     fontWeight: "700",
     fontSize: 10,
     lineHeight: 13,
-    fontFamily: fontFamily.medium
+    paddingHorizontal: 0,
+    fontFamily: fontFamily.medium,
+    borderBottomColor: color.palette.redNature,
+    borderBottomWidth: "1@ms"
   },
+  tabItemActive: {
+    borderBottomColor: color.palette.redNature,
+    borderBottomWidth: "2@ms"
+  }
 })
 export default TabViewNavigator
