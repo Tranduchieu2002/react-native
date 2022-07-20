@@ -15,7 +15,7 @@ type SceneNewScreen = {
 const FirstRoute = () => <View style={{ flex: 1, backgroundColor: "#ff4081" }} />
 const SecondRoute = () => <View style={{ flex: 1, backgroundColor: "#673ab7" }} />
 
-const renderScene = ({ route }: any): JSX.Element | null => {
+const renderScene: any = ({ route }: any): JSX.Element | null => {
   const key: keyof SceneNewScreen = route.key
   switch (key) {
     case "all":

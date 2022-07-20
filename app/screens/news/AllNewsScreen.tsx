@@ -6,11 +6,12 @@ import { CarouselSlider } from "../../components";
 import SectionListNews from "../../components/sections/sections";
 import { useModalize } from "../../hooks/useModalize";
 import { color } from "../../theme";
+import { data } from "../live/tabViews/allScreen";
 const ImageDemo = require("../../../assets/images/app-notFoundImage.png")
 interface AllNewsScreenProps { }
 
 const AllNewsScreen: React.FC<AllNewsScreenProps> = (props: AllNewsScreenProps) => {
-  const { ref, open, close } = useModalize();
+  const { ref, open } = useModalize();
   React.useEffect(() => {
     if (!ref.current) return
     open()
@@ -70,11 +71,23 @@ const AllNewsScreen: React.FC<AllNewsScreenProps> = (props: AllNewsScreenProps) 
     },
   ], [])
 
-
-
+  const data: data[] = React.useMemo(
+    () =>
+      [...Array(4)].map(() => {
+        return {
+          id: String(Math.random() * 999),
+          /* https://randomuser.me/api/portraits/women/11.jpg */
+          image: require("../../../assets/images/app-notFoundImage.png"),
+          name: "Tran Hieu",
+          jobTitle:
+            "Lorem ipsum dolor sit amet,  sed do eiusmod tempor incididunt. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+          email: "Hieu@gmail.cómn",
+        }
+      }),
+    [])
   return (
     <View style={styles.container}>
-      <CarouselSlider type="images" />
+      <CarouselSlider type="images" data={data} />
       <View style={styles.contentContainer}>
         <SectionListNews
           data={DATA}
@@ -85,22 +98,6 @@ const AllNewsScreen: React.FC<AllNewsScreenProps> = (props: AllNewsScreenProps) 
             paddingRight: 16,
           }}
         />
-        {/* <Modalize ref={ref}
-          sectionListProps={{
-            sections: DATA,
-            horizontal: false,
-            style: {
-              width: '100%',
-              paddingLeft: 16,
-              paddingRight: 16,
-            },
-            ListEmptyComponent: () => <ActivityIndicator />,
-            renderItem: (props) => <ItemSection key={props.index} {...props}></ItemSection>,
-          }}
-          snapPoint={300}
-          withHandle={false}
-        >
-        </Modalize> */}
       </View>
     </View >
   )

@@ -1,5 +1,5 @@
 import { types } from "mobx-state-tree"
-import { RouteNames } from "../../navigators/home-navigator"
+import { BottomTabRouteNames } from "../../navigators/bottomTab"
 export const CommonModel = types
   .model("commonModel")
   .props({
@@ -7,6 +7,6 @@ export const CommonModel = types
   })
   .actions((self) => ({
     setRouteName: (routeName: string) => {
-      self.routeName  = RouteNames[routeName]
+      self.routeName  = BottomTabRouteNames[routeName]
     },
   }))

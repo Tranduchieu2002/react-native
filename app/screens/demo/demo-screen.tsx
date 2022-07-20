@@ -1,21 +1,15 @@
-import React, { FC } from "react"
 import notifee from '@notifee/react-native';
-import { ImageStyle, Platform, TextStyle, View, ViewStyle } from "react-native"
-import { StackScreenProps } from "@react-navigation/stack"
-import { observer } from "mobx-react-lite"
+import { observer } from "mobx-react-lite";
+import React, { FC } from "react";
+import { ImageStyle, Platform, TextStyle, View, ViewStyle } from "react-native";
 import {
-  BulletItem,
-  Button,
-  Header,
-  Text,
-  Screen,
-  AutoImage as Image,
-  GradientBackground,
-} from "../../components"
-import { NavigatorParamList } from "../../navigators"
-import { color, spacing } from "../../theme"
-import { Api } from "../../services/api"
-import { save } from "../../utils/storage"
+  AutoImage as Image, BulletItem,
+  Button, GradientBackground, Header, Screen, Text
+} from "../../components";
+import { RootStackScreenProps } from "../../navigators/types";
+import { Api } from "../../services/api";
+import { color, spacing } from "../../theme";
+import { save } from "../../utils/storage";
 export const logoIgnite = require("./logo-ignite.png")
 export const heart = require("./heart.png")
 
@@ -94,7 +88,7 @@ const platformCommand = Platform.select({
   android: "Cmd/Ctrl + M",
 })
 
-export const DemoScreen: FC<StackScreenProps<NavigatorParamList, "demo">> = observer(
+export const DemoScreen: FC<RootStackScreenProps<"demo">> = observer(
   ({ navigation }) => {
     const goBack = () => navigation.goBack()
     async function onDisplayNotification() {
