@@ -46,7 +46,7 @@ function App() {
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
   // Kick off initial async loading actions, like loading fonts and RootStore
-  
+
   useEffect(() => {
     ; (async () => {
       SplashScreen.hide()
