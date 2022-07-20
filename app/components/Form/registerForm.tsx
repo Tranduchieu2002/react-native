@@ -88,7 +88,7 @@ function RegisterForm(props: FormProps) {
     email: "",
     password: "",
   }
-  const { control, handleSubmit, reset, errors, getValues  } = useForm<FORMDATA>({
+  const { control, handleSubmit, errors } = useForm<FORMDATA>({
     defaultValues: initialValues
   })
   const [isShow, setIsShow] = useState<boolean>(false)
@@ -98,7 +98,7 @@ function RegisterForm(props: FormProps) {
   const { authStore } = useStores()
   const { status, messages, signup, login } = authStore
 
-  
+
   const gotoLogin = () => {
     props.isLoginScreen ?
       navigate("register") :
@@ -194,7 +194,7 @@ function RegisterForm(props: FormProps) {
         }
       </Button>
       <Text style={TEXTERROR} text={messages}></Text>
-      <Text text="Have a account?" style={[TEXTSUBMIT, { color: color.palette.purple }]} onPress={() => gotoLogin()}> </Text>
+      <Text text={props.isLoginScreen ? "Dont have a account?" : "Have a account"} style={[TEXTSUBMIT, { color: color.palette.purple }]} onPress={() => gotoLogin()}> </Text>
     </View>
   )
 }
