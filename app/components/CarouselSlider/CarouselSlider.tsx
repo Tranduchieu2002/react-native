@@ -4,6 +4,7 @@ import { Dimensions, View } from "react-native"
 import { ms, s, ScaledSheet } from "react-native-size-matters"
 import Carousel from "react-native-snap-carousel"
 import { PlaySvg } from "../../../assets/svgs"
+import { data } from "../../screens/live/tabViews/allScreen"
 import { CarouselPagination } from "./CarouselPagination"
 import CarouselSlide from "./CarouselSlide"
 import CarouselSlideVideo from "./CarouselSlideVideo"
@@ -17,49 +18,27 @@ interface initial {
 }
 
 interface CarouselSliderProps {
-  type: "images" | "video"
+  type: "images" | "video",
+  data: data[]
 }
 
-export type data = {
-  id: string
-  image: string
-  name: string
-  jobTitle: string
-  email: string
-}
-export const CarouselSlider: FC<CarouselSliderProps> = ({ type }: CarouselSliderProps) => {
+
+export const CarouselSlider: FC<CarouselSliderProps> = ({ type, data }: CarouselSliderProps) => {
   const { width } = Dimensions.get("window")
   let [state, setState] = useState<initial>(initialState)
-  /* const activeImage = useMemo(
-    () => photos[photos.activeImageIndex],
-    [photos.activeImageIndex, photos],
-  ) */
-  const height = 200
+
+  const height = 250
   let carouselRef = useRef<any>(null)
 
   const handleSlideChange = useCallback((indexSlide: number): void => {
     carouselRef.current._snapToItem(carouselRef.current._getPositionIndex(indexSlide))
   }, [])
 
-  const DATA: data[] = useMemo(
-    () =>
-      [...Array(4)].map(() => {
-        return {
-          id: String(Math.random() * 999),
-          /* https://randomuser.me/api/portraits/women/11.jpg */
-          image: require("../../../assets/images/app-notFoundImage.png"),
-          name: "Tran Hieu",
-          jobTitle:
-            "Lorem ipsum dolor sit amet,  sed do eiusmod tempor incididunt. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          email: "Hieu@gmail.cómn",
-        }
-      }),
-    [],
-  )
-  const renderItem = ({ item }) => {
+
+  const renderItem: any = useCallback(({ item }) => {
     if (type === "images") return <CarouselSlide item={item} />
     return <CarouselSlideVideo />
-  }
+  }, [])
   return (
     <>
       <View style={styles.swiperContainer}>
@@ -67,12 +46,12 @@ export const CarouselSlider: FC<CarouselSliderProps> = ({ type }: CarouselSlider
           layout={"default"}
           ref={carouselRef}
           style={styles.swiper}
-          data={DATA}
+          data={data}
           renderItem={renderItem}
           sliderHeight={s(height)}
-          itemHeight={s(height)}
-          sliderWidth={width}
-          itemWidth={width}
+          itemHeight={s(width * 4 / 3)}
+          sliderWidth={s(width)}
+          itemWidth={(width - 30)}
           autoplay
           loop={true}
           onSnapToItem={(index) =>
@@ -87,8 +66,8 @@ export const CarouselSlider: FC<CarouselSliderProps> = ({ type }: CarouselSlider
       </View>
       <CarouselPagination
         activeImageIndex={state.activeImageIndex}
-        entriesLength={DATA.length}
-        entries={DATA}
+        entriesLength={data.length}
+        entries={data}
         handleSlideChange={handleSlideChange} />
     </>
   )
@@ -96,8 +75,10 @@ export const CarouselSlider: FC<CarouselSliderProps> = ({ type }: CarouselSlider
 
 const styles = ScaledSheet.create({
   swiperContainer: {
-    width: Dimensions.get("window").width,
-    height: "200@s"
+    width: '100%',
+    height: "250@s",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   swiper: {
     position: "relative",
