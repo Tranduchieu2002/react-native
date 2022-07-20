@@ -1,49 +1,74 @@
-import { StyleSheet, View } from "react-native"
 import React from "react"
-import { color, spacing } from "../../theme"
+import { View } from "react-native"
+import { ScaledSheet } from "react-native-size-matters"
 import { MenuSvg, SearchSvg } from "../../../assets/svgs"
-import { Text } from "../text/text"
-import { observer } from "mobx-react-lite"
-import { useStores } from "../../models"
-import { translate } from "../../i18n"
+import { color, spacing } from "../../theme"
 import { fontFamily } from "../../theme/fonts"
+import { Text } from "../text/text"
 const HeaderApp = () => {
-  const { commonStore } = useStores()
-  const { routeName } = commonStore
-
-  const headerTitle = translate(`BottomTab.${routeName}`)
   return (
-    <View style={styles.header}>
-      <SearchSvg />
-      <Text text={String(headerTitle)} style={styles.mainTitle}></Text>
-      <MenuSvg />
+    <View style={styles.headerContainer}>
+      <View style={styles.header}>
+        <MenuSvg />
+        <View style={styles.textWrap}>
+          <Text text={"Trang thông tin"} style={styles.smallText}></Text>
+          <Text text={"Đối Ngoại"} style={[styles.mainTitle, styles.bigText]}></Text>
+        </View>
+        <SearchSvg />
+      </View>
+      <View style={styles.borderBottomHeader}>
+      </View>
     </View>
   )
 }
 
-export default observer(HeaderApp)
+export default HeaderApp
 
-const styles = StyleSheet.create({
-  headerWrapper: {
-    flex: 1,
-    paddingLeft: spacing[4],
-    paddingRight: spacing[4],
+const styles = ScaledSheet.create({
+  headerContainer: {
+    width: '100%',
+    height: "53@vs",
+    position: "relative",
+    backgroundColor: color.transparent
   },
   header: {
+    height: "50@vs",
+    width: "100%",
     justifyContent: "space-between",
-    height: 36,
+    alignItems: 'center',
+    flexDirection: "row",
+    backgroundColor: color.palette.deepBlack,
     paddingLeft: spacing[4],
     paddingRight: spacing[4],
-    flexDirection: "row",
-    paddingHorizontal: spacing[4],
-    backgroundColor: color.palette.deepBlack
+    borderBottomLeftRadius: "25@ms",
+    borderBottomRightRadius: "25@ms",
+    zIndex: 999,
+  },
+  borderBottomHeader: {
+    position: "absolute",
+    zIndex: 10,
+    height: "100%",
+    width: "100%",
+    borderBottomLeftRadius: "25@ms",
+    borderBottomRightRadius: "25@ms",
+    backgroundColor: color.palette.redNature,
+  },
+  textWrap: {
+    alignItems: "center",
   },
   mainTitle: {
-    fontWeight: "700",
-    fontSize: 14,
-    lineHeight: 18,
     color: color.palette.white,
     textAlign: "center",
-    fontFamily: fontFamily.medium
+    textTransform: "uppercase",
   },
+  smallText: {
+    fontFamily: fontFamily.semiBold,
+    fontSize: "10@ms",
+    fontWeight: "600"
+  },
+  bigText: {
+    fontSize: "24@ms",
+    fontWeight: "700",
+    fontFamily: fontFamily.utmTimesBold,
+  }
 })

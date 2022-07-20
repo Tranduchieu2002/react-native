@@ -8,6 +8,7 @@ export const initFonts = async () => {
   await Font.loadAsync({
     BeVietnamProMedium: require("./BeVietnamPro-Medium.ttf"),
     BeVietnamProSemiBold: require("./BeVietnamPro-SemiBold.ttf"),
+    UtmTimesBold: require("./UTMTimesBold.ttf"),
     //   "Montserrat-Regular": require("./Montserrat-Regular.ttf"),
   })
 }
@@ -15,4 +16,6 @@ export const initFonts = async () => {
 export enum fontFamily {
   medium = "BeVietnamProMedium",
   semiBold = "BeVietnamProSemiBold",
+  bold = "BeVietnamProSemiBold",
+  utmTimesBold = "UtmTimesBold"
 }
